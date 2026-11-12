@@ -30,7 +30,7 @@ PyPI 现在**强制要求 2FA**，没有例外。
 ```bash
 # 方式 A：环境变量（推荐，临时生效）
 export TWINE_USERNAME=__token__
-export TWINE_PASSWORD=pypi-AgEIcHlwaS5vcmc...
+export TWINE_PASSWORD=<你的 pypi token，形如 pypi-AgEI...，此处不要写成真实值>
 
 # 方式 B：~/.pypirc（存到用户目录，权限 0600，绝不入库）
 [distutils]
