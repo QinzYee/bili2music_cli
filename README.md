@@ -38,7 +38,7 @@ b2m doctor
 从源码或本地构建安装：
 
 ```bash
-pipx install "git+https://github.com/YOUR_GITHUB/bili-to-music-cli.git"
+pipx install "git+https://github.com/QinzYee/bili2music_cli.git"
 pipx install ./dist/bili2music-0.1.0-py3-none-any.whl
 ```
 

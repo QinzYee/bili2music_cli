@@ -1,0 +1,62 @@
+name: Publish to PyPI
+
+# 打 tag 触发发布（如 v0.1.1）。优先使用 Trusted Publishing（免 token），
+# 未配置时回退到仓库 secret PYPI_API_TOKEN。
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build distributions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install build tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Build
+        run: python -m build
+
+      - name: Check metadata
+        run: python -m twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: upload to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/bili2music/
+    permissions:
+      # Trusted Publishing 需要 id-token
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish (trusted publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          # 若未配置 Trusted Publishing，改为在仓库 secrets 里放 PYPI_API_TOKEN，
+          # 并把下面两行换成 password: ${{ secrets.PYPI_API_TOKEN }}
+          attestations: false

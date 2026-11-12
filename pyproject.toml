@@ -47,12 +47,12 @@ dev = ["pytest>=8", "build>=1.2", "twine>=5"]
 [project.scripts]
 b2m = "bili2music.cli:main"
 
-# 填好代码托管地址后取消注释（PyPI 页面会显示这些链接）
-# [project.urls]
-# Homepage = "https://github.com/<your-name>/bili-to-music-cli"
-# Repository = "https://github.com/<your-name>/bili-to-music-cli"
-# Issues = "https://github.com/<your-name>/bili-to-music-cli/issues"
-# Changelog = "https://github.com/<your-name>/bili-to-music-cli/blob/main/CHANGELOG.md"
+[project.urls]
+Homepage = "https://github.com/QinzYee/bili2music_cli"
+Repository = "https://github.com/QinzYee/bili2music_cli"
+Issues = "https://github.com/QinzYee/bili2music_cli/issues"
+Changelog = "https://github.com/QinzYee/bili2music_cli/blob/main/CHANGELOG.md"
+PyPI = "https://pypi.org/project/bili2music/"
 
 [tool.setuptools.packages.find]
 include = ["bili2music*"]

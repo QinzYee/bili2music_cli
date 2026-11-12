@@ -93,15 +93,43 @@ version = "0.1.0"   # 0.1.0 → 0.1.1 → 0.2.0
 - `pyproject.toml` 的 `version`
 - `bili2music/__init__.py` 的 `__version__`
 
-## 5. 可选但强烈建议：GitHub 仓库 + 自动发布
+## 5. GitHub 仓库 + 自动发布
 
-发布到 PyPI 后，README 里的 `YOUR_GITHUB` 占位和 `[project.urls]` 都需要真实地址。建好仓库后：
+仓库：https://github.com/QinzYee/bili2music_cli
 
-1. 填 `pyproject.toml` 里注释掉的 `[project.urls]`（取消注释并改地址）
-2. 把 README 中所有 `YOUR_GITHUB` 替换成你的实际 GitHub 用户名
-3. 加上 Trusted Publishing（免 token 发布，最安全）：
-   - PyPI 项目 Settings → Publishing → 添加 GitHub Actions 为可信发布者
-   - 之后打 tag 就自动发布，不再需要 token
+`[project.urls]` 与 README 中的地址均已填好。剩下的是一次性配置：
+
+1. **推代码**（首次）
+   ```bash
+   git remote add origin git@github.com:QinzYee/bili2music_cli.git
+   git push -u origin main
+   ```
+
+2. **加 Trusted Publishing（免 token 发布，最安全）**
+   - 打开 https://pypi.org/manage/project/bili2music/settings/publishing/
+   - 添加 GitHub 发布者，填写：
+     - Owner：`QinzYee`
+     - Repository：`bili2music_cli`
+     - Workflow name：`publish.yml`
+     - Environment：`pypi`
+   - 保存后，`.github/workflows/publish.yml` 就能在打 tag 时免密发布
+
+3. **（可选）在 GitHub 建同一个 `pypi` environment**
+   - 仓库 Settings → Environments → New environment → 名字填 `pypi`
+   - 需要人工确认发布时，可加 Required reviewers
+
+4. **发布新版本**
+   ```bash
+   # 先改版本号：pyproject.toml 与 bili2music/__init__.py 两处
+   git commit -am "chore: bump version to 0.1.1"
+   git tag v0.1.1
+   git push && git push --tags
+   ```
+   推 tag 后 Actions 自动构建并发布，无需本地 token。
+
+> 没配 Trusted Publishing 也能用：在仓库 Settings → Secrets 里加 `PYPI_API_TOKEN`，
+> 并把 `publish.yml` 中 `uses: pypa/gh-action-pypi-publish@release/v1` 下的注释替换为
+> `password: ${{ secrets.PYPI_API_TOKEN }}`。
 
 ## 6. 如果链接 404 / 包被占用
 
