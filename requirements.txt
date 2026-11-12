@@ -1,0 +1,9 @@
+# Runtime dependencies. Alternative to `pip install -e .` when build isolation
+# cannot reach your configured package index:
+#   pip install -i https://pypi.org/simple -r requirements.txt
+#   python -m bili2music doctor
+httpx>=0.27
+yt-dlp>=2025.1.1
+rich>=13.7
+qrcode>=8.0
+imageio-ffmpeg>=0.6.0
