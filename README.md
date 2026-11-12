@@ -27,7 +27,7 @@ python -m pipx ensurepath
 pipx install bili2music
 # 或从本地 wheel / git 安装
 pipx install ./dist/bili2music-0.1.0-py3-none-any.whl
-pipx install "git+https://github.com/<you>/bili-to-music-cli.git"
+pipx install "git+https://github.com/YOUR_GITHUB/bili-to-music-cli.git"
 
 b2m doctor
 ```
@@ -201,14 +201,15 @@ Agent 会自己跑 `b2m agent-guide` 学会全部参数和错误处理，无需�
 
 ### 作为 Skill 安装（推荐给 AI 常态化使用）
 
-本仓库 `skills/bili-download/SKILL.md` 是一份**路径无关**的 Agent 技能文件，安装后 AI 遇到「下载 B 站音频」会自动触发：
+技能文件**已随 wheel 一起安装**，一条命令即可落地，不需要手抄或下载：
 
 ```bash
-# Claude Code / WorkBuddy 等按各自的 skill 目录放置，例如：
-mkdir -p ~/.workbuddy/skills/bili-download
-curl -fsSL https://raw.githubusercontent.com/<you>/bili-to-music-cli/main/skills/bili-download/SKILL.md \
-  -o ~/.workbuddy/skills/bili-download/SKILL.md
+b2m skill                     # 自动探测已安装的 AI 工具，写入对应 skills 目录
+b2m skill --target workbuddy  # 指定：workbuddy / claude / cursor / codex
+b2m skill --target ~/my-agent/skills   # 或任意自定义目录
 ```
+
+装好后它会提示目标路径；重启你的 AI 工具即生效。之后你说「把某个 B 站收藏夹下成 mp3」，AI 会自动触发该技能并按两步流程操作。
 
 技能文件只依赖 PATH 上的 `b2m` 命令，不绑定任何绝对路径 —— 装在哪台机器都能用。核心内容始终来自 `b2m agent-guide`，技能文件只是触发器与铁律摘要。
 

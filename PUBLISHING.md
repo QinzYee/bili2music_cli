@@ -93,10 +93,10 @@ version = "0.1.0"   # 0.1.0 → 0.1.1 → 0.2.0
 
 ## 5. 可选但强烈建议：GitHub 仓库 + 自动发布
 
-发布到 PyPI 后，README 里的 `<you>` 占位和 `[project.urls]` 都需要真实地址。建好仓库后：
+发布到 PyPI 后，README 里的 `YOUR_GITHUB` 占位和 `[project.urls]` 都需要真实地址。建好仓库后：
 
 1. 填 `pyproject.toml` 里注释掉的 `[project.urls]`（取消注释并改地址）
-2. 把 README 中所有 `<you>/bili-to-music-cli` 替换成你的实际仓库路径
+2. 把 README 中所有 `YOUR_GITHUB` 替换成你的实际 GitHub 用户名
 3. 加上 Trusted Publishing（免 token 发布，最安全）：
    - PyPI 项目 Settings → Publishing → 添加 GitHub Actions 为可信发布者
    - 之后打 tag 就自动发布，不再需要 token
