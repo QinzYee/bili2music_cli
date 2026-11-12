@@ -1,6 +1,12 @@
 # bili-to-music-cli (`b2m`)
 
+[![PyPI](https://img.shields.io/pypi/v/bili2music.svg)](https://pypi.org/project/bili2music/)
+[![Python](https://img.shields.io/pypi/pyversions/bili2music.svg)](https://pypi.org/project/bili2music/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 一个和大模型对话的 B 站下载 CLI。核心特点：**信息不全时先主动提问，整理出清单后必须你确认，才真正开始下载**。
+
+> 已发布到 PyPI：`pipx install bili2music` → 命令 `b2m`
 
 ## 能力
 
@@ -21,15 +27,19 @@
 ```bash
 # 先装 pipx（只需一次）
 python -m pip install --user pipx
-python -m pipx ensurepath
+python -m pipx ensurepath        # 之后重开终端
 
 # 安装 b2m
 pipx install bili2music
-# 或从本地 wheel / git 安装
-pipx install ./dist/bili2music-0.1.0-py3-none-any.whl
-pipx install "git+https://github.com/YOUR_GITHUB/bili-to-music-cli.git"
 
 b2m doctor
+```
+
+从源码或本地构建安装：
+
+```bash
+pipx install "git+https://github.com/YOUR_GITHUB/bili-to-music-cli.git"
+pipx install ./dist/bili2music-0.1.0-py3-none-any.whl
 ```
 
 pipx 会把 `b2m` 放进独立环境并注入 PATH，**不污染系统 Python**，卸载用 `pipx uninstall bili2music`。
